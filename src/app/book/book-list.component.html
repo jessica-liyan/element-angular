@@ -1,0 +1,34 @@
+<div class="mt-10 mb-10">
+  <div el-row>
+    <div el-col span="8">
+      <el-input [model]="keyword" placeholder="请输入图书名称" (keyup.enter)="search()" ></el-input>
+    </div>
+    <div el-col span="8">
+      <el-button (click)="search(keyword)">搜索</el-button>
+    </div>
+  </div>
+</div>
+<ul class="listBlock">
+  <li *ngFor='let book of bookList' (click)="gotoDetail(book.id)" [class.selected]="selectedId == book.id">
+    <i class="block img"><img src="{{book.image}}" class="v-m"/></i>
+    <b class="block fs-14 c-3 oneline">{{book.title}}</b>
+    <i class="block fs-14 c-9 mt-5">
+      <span *ngIf="book.rating.average">{{book.rating.average}}分</span>
+      <span *ngIf="book.author.length">/ {{book.author[0]}}</span>
+    </i>
+    <i class="block fs-14 c-9 mt-5">
+      <span *ngIf="book.publisher">{{book.publisher}}</span>
+      <span *ngIf="book.pubdate">/ {{book.pubdate}}</span> 
+    </i>
+    <i class="block fs-16 c-blue mt-5">
+      <span *ngIf="book.price">{{book.price}}</span>
+    </i>
+  </li>
+</ul>
+<div class="pages">
+  <span class="fs-14 c-9 v-m">{{index + 1}}/{{n}}页</span>
+  <a (click)="home()">首页</a>
+  <a (click)="prev()">上一页</a>
+  <a (click)="next()">下一页</a>
+  <a (click)="end()">末页</a>
+</div>
