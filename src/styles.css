@@ -38,8 +38,8 @@ i,em{font-style:normal;}b{font-weight:normal;}
 .bg-f{background:#fff;}
 .oneline{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
-html,body{height:100%;}
-.app{background:#f7f7f7;min-height:100%;}
+html,body{height:100%;overflow:hidden;}
+.app{background:#f7f7f7;height:100%;}
 .main{padding:20px;box-sizing:border-box;}
 .midLayout{width:80%;margin:20px auto;}
 .wrapper{background:#fff;box-shadow:0 0 5px #ccc;padding:20px;box-sizing:border-box;}

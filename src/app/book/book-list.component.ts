@@ -15,7 +15,7 @@ export class BookListComponent implements OnInit{
   keyword: string= 'js'; // 默认搜索项
   total: number; // 总条数
   index: number; // 当前页数
-  count: number = 20; // 每页条数
+  count: number = 10; // 每页条数
   n: number; // 总页数
 
   selectedId: number;
