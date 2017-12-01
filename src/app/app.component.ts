@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
     private titleService: Title
   ) {}
 
+  toggle:boolean = false;
+
   ngOnInit(){
     this.router.events
       .filter(event => event instanceof NavigationEnd)
@@ -32,5 +34,18 @@ export class AppComponent implements OnInit {
       .subscribe(data => {
         this.titleService.setTitle(data['title'])
       })
+  }
+
+  login(){
+    setTimeout(()=>{
+      this.closePopup()
+    },1000)
+  }
+  cancel(){
+    this.closePopup()
+  }
+
+  closePopup() {
+    this.router.navigate([{ outlets: { popup: null }}]);
   }
 }

@@ -1,13 +1,36 @@
 <div class="app">
   <el-container>
     <el-header class="nav">
-      <a routerLink="/book" routerLinkActive="active">图书</a>
-      <a routerLink="/movie" routerLinkActive="active">电影</a>
-      <a routerLink="/admin" routerLinkActive="active">管理</a>
-      <a [routerLink]="[{ outlets: { popup: ['login'] } }]" style="margin: 0 20px;"><img src="../assets/image/login.png" class="v-m"/></a>
+      <div el-row type="flex" justify="space-between">
+        <div el-col span="20">
+          <a routerLink="/book" routerLinkActive="active" class="nav-item">图书</a>
+          <a routerLink="/movie" routerLinkActive="active" class="nav-item">电影</a>
+          <a routerLink="/admin" routerLinkActive="active" class="nav-item">管理</a>
+        </div>
+        <div el-col span="4">
+          <el-tooltip placement="bottom">
+            <a style="margin: 0 20px;" (click)="toogle = true" class="nav-item"><img src="../assets/image/login.png" class="v-m"/></a>
+            <ng-template #tip>
+              <el-button type="text"><a routerLink="/myCenter" routerLinkActive="active">我的中心</a></el-button>
+              <el-button type="text"><a routerLink="/myMessage" routerLinkActive="active">我的信息</a></el-button>
+              <el-button type="text"><a routerLink="/login" routerLinkActive="active">登录/注册</a></el-button>
+            </ng-template>
+          </el-tooltip>
+        </div>
+      </div>
     </el-header>
     <el-main>
       <router-outlet></router-outlet>
     </el-main>
+    <el-dialog [title]="'登录'"[(visible)]="toogle" [top]="'40%'" [custom-class]="'login'">
+      <div>
+        <el-input [model]="username" placeholder="用户名"></el-input>
+        <el-input [model]="password" placeholder="密码"></el-input>
+      </div>
+      <ng-template #footer>
+        <el-button type="primary" plain="true" (click)="login()">登录</el-button>
+        <el-button (click)="toogle = false" plain>取消</el-button>
+      </ng-template>
+    </el-dialog>
   </el-container>
 </div>

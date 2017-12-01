@@ -13,10 +13,10 @@ import {slideInDownAnimation} from '../animation';
   selector: 'book-detail',
   animations: [slideInDownAnimation],
   template: `
+    <el-button type="primary" plain="true" icon="arrow-left" (click)="goBack(book)">返回</el-button>
     <div class="midLayout">
-      <a (click)="goBack(book)"><img src="../assets/image/back.png" class="v-m"/><span class="fs-14 c-9 v-m ml-10">返回</span></a>
       <h2>{{book.title}}</h2>
-      <div class="wrapper">
+      <el-card>
         <div class="row w">
           <div class="col v-t" style="width:200px;">
             <img src="{{book.image}}"/>
@@ -44,7 +44,7 @@ import {slideInDownAnimation} from '../animation';
         <h3 class="fs-16 c-3 mt-20 mb-10">目录</h3>
         <p class="fs-14 c-6 lh-20" style="white-space:pre;" *ngIf="book.catalog">{{book.catalog}}</p>
         <p class="fs-14 c-6 lh-20" *ngIf="!book.catalog">暂无目录</p>
-      </div>      
+      </el-card>      
     </div>
   `
 })

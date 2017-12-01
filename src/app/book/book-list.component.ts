@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import { DoubanService } from './../douban.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -15,24 +15,34 @@ export class BookListComponent implements OnInit{
   keyword: string= 'js'; // 默认搜索项
   total: number; // 总条数
   index: number; // 当前页数
-  count: number = 10; // 每页条数
+  count: number; // 每页条数
   n: number; // 总页数
 
   selectedId: number;
 
+  @ViewChild('list')
+  listBlock: ElementRef
+
   constructor(
     private DoubanService: DoubanService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private ElementRef: ElementRef
   ){} 
   
   ngOnInit():void{
     this.activatedRoute.paramMap.subscribe(params => {
       this.index = +params.get('page')
       this.selectedId = +params.get('id')
-      this.search()
       console.log(this.selectedId)
     })
+  }
+
+  ngAfterViewInit(){
+    let w = this.listBlock.nativeElement.offsetWidth
+    this.count = Math.floor(w/260)*4
+    console.log(this.count)
+    this.search()
   }
 
   search(){
@@ -46,24 +56,14 @@ export class BookListComponent implements OnInit{
       })
   }
 
-  prev(){
-    this.index = this.index > 0 ? this.index - 1 : 0;
-    this.search()
-  }
-  next(){
-    this.index = this.index < this.n -1 ? this.index + 1 : this.n - 1;
-    this.search()
-  }
-  home(){
-    this.index = 0
-    this.search()
-  }
-  end(){
-    this.index = this.n - 1
-    this.search()
-  }
   gotoDetail(id){
     this.router.navigate(["/book", id, {page: this.index}])
+  }
+
+  change(nextPage){
+    console.log('change',nextPage)
+    this.index = nextPage - 1
+    this.search()
   }
 }
 
