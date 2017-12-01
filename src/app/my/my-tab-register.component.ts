@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import {cities} from './cities';
-import { ElMessageService } from 'element-angular'
+import { ElMessageService } from 'element-angular';
+import { CoolLocalStorage } from 'angular2-cool-storage';
  
 @Component({
   template: `
@@ -79,7 +80,8 @@ export class RegisterComponent implements OnInit{
   tags: string[];
 
   constructor(
-    private message: ElMessageService
+    private message: ElMessageService,
+    private localStorage: CoolLocalStorage
   ){} 
 
   ngOnInit(){
@@ -90,8 +92,7 @@ export class RegisterComponent implements OnInit{
     this.tags = tags
   }
   
-  // 个人说
-  明和个人标签选填
+  // 个人说明和个人标签选填
   submit(){
     console.log(this.username,this.sex,this.birthDate,this.location,this.note,this.tags)
     if(!this.username){
@@ -103,7 +104,14 @@ export class RegisterComponent implements OnInit{
     }else if(!this.location){
       this.message.error('出生地不能为空！')
     }else{
-      
+      this.localStorage.setObject('userInfo', {
+        username: this.username,
+        sex: this.sex,
+        birthDate: this.birthDate,
+        location: this.location,
+        note: this.note,
+        tags: this.tags
+      });
     }
   }
 }

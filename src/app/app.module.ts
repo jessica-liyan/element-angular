@@ -15,7 +15,9 @@ import {ElModule} from 'element-angular';
 import {BookModule} from './book/book.module';
 import {MovieModule} from './movie/movie.module';
 import {MyModule} from './my/my.module';
+
 import {DoubanService} from './douban.service';
+import { CoolStorageModule } from 'angular2-cool-storage';
 
 const routes: Routes = [{
   path: '',
@@ -40,6 +42,7 @@ const routes: Routes = [{
     BookModule,
     MovieModule,
     MyModule,
+    CoolStorageModule,
     RouterModule.forRoot(routes,{
       enableTracing: false
     })

@@ -1,11 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import { DoubanService } from './../douban.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-
-import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
-import {cities} from './cities';
+import { Component, OnInit} from '@angular/core';
+import { CoolLocalStorage } from 'angular2-cool-storage';
  
 @Component({
   template: `
@@ -15,7 +9,7 @@ import {cities} from './cities';
         <tr>
           <th class="label">昵称：</th>
           <td>
-            <el-input [model]="input" placeholder="请输入内容"></el-input>
+            <el-input [(model)]="userInfo.username" placeholder="请输入内容"></el-input>
           </td>
         </tr>
         <tr>
@@ -72,28 +66,18 @@ import {cities} from './cities';
 })
 
 export class MyMessageComponent implements OnInit{
-  cities = [];
-  constructor(
-    private DoubanService: DoubanService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private ElementRef: ElementRef
-  ){} 
+  userInfo: {
+    username: string,
+    sex: string,
+    birthDate: string,
+    location: string,
+    note: string,
+    tags: string[],
+  };
 
-  // cities = [{
-  //   label: '湖北',
-  //   value: '01',
-  //   children: [{
-  //     label: '武汉',
-  //     value: '0101',
-  //   },{
-  //     label: '襄阳',
-  //     value: '0102',
-  //   }]
-  // },{
-  //   label: '湖南',
-  //   value: '02'
-  // }]
+  constructor(
+    private localStorage: CoolLocalStorage
+  ){} 
 
   tags = [{
     name: '王者荣耀'
@@ -111,7 +95,6 @@ export class MyMessageComponent implements OnInit{
   }]
 
   ngOnInit(){
-    console.log(cities)
-    this.cities = cities
+    this.userInfo = this.localStorage.getObject('userInfo')
   }
 }
