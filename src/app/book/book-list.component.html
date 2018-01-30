@@ -1,11 +1,9 @@
 <div class="mt-10 mb-10">
-  <div el-row>
-    <div el-col span="8">
-      <el-input [(model)]="keyword" icon="search" placeholder="请输入图书名称" (keyup.enter)="search()" ></el-input>
-    </div>
-    <div el-col span="8" class="pl-10">
+  <div class="search">
+    <el-input [(model)]="keyword" icon="search" placeholder="请输入图书名称" (keyup.enter)="search()" ></el-input>
+    <!-- <div class="col v-m pl-10">
       <el-button (click)="search(keyword)">搜索</el-button>
-    </div>
+    </div> -->
   </div>
 </div>
 <ul class="listBlock" #list>

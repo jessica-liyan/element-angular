@@ -10,11 +10,13 @@ import { LoginComponent } from './my-tab-login.component';
 import { RegisterComponent } from './my-tab-register.component';
 
 import {ElModule} from 'element-angular';
+import {AuthGuard} from '../auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'myCenter',
     component: MyCenterComponent,
+    canActivate: [AuthGuard],
     data: {title: '我的中心'}
   },{
     path: 'myMessage',

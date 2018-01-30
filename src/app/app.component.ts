@@ -2,11 +2,13 @@ import { rxSubscriber } from 'rxjs/symbol/rxSubscriber';
 import { Component, OnInit} from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { CoolLocalStorage } from 'angular2-cool-storage';
 
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import * as Rx from 'rxjs/Rx';
+import {showMsg} from 'ng5-ui';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +18,28 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private titleService: Title
-  ) {}
+    private titleService: Title,
+    private localStorage: CoolLocalStorage
+  ) {
+    console.log(showMsg)
+  }
 
-  toggle:boolean = false;
+  show:boolean = false;
+  loginIn:boolean = false;
+  loginOut:boolean = false;
+  username: string = '';
+  loginInfo: {
+    username: string
+  };
 
   ngOnInit(){
+    this.loginInfo = this.localStorage.getObject('loginInfo')
+    if(this.loginInfo && this.loginInfo.username){
+      this.username = this.loginInfo.username
+    }else{
+      this.username = '[未登录]'
+    }
+
     this.router.events
       .filter(event => event instanceof NavigationEnd)
       .map(() => this.activatedRoute)
@@ -41,6 +59,15 @@ export class AppComponent implements OnInit {
       this.closePopup()
     },1000)
   }
+
+  loginout(){
+    this.loginOut = false
+    this.localStorage.removeItem('loginInfo')
+    setTimeout(()=>{
+      window.location.reload()
+    },300)
+  }
+
   cancel(){
     this.closePopup()
   }

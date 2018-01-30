@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
 
 @import "~element-angular/theme/index.css";
 
@@ -11,7 +10,7 @@ img{border:none;}
 table{border-collapse:collapse;border-spacing:0; table-layout: fixed;}
 input,textarea,button,select{border:none;}
 input:focus,textarea:focus,button:focus,select:focus {outline:none;}
-a{text-decoration:none;font-size:inherit;color:inherit;cursor:pointer;}
+a{text-decoration:none;cursor:pointer;}
 a:hover{text-decoration:none;}
 i,em{font-style:normal;}b{font-weight:normal;}
 
@@ -34,7 +33,7 @@ i,em{font-style:normal;}b{font-weight:normal;}
 .pd-10{padding:10px;}.bs{box-sizing:border-box;}
 
 .fs-0{font-size:0px;}.fs-12{font-size:12px;}.fs-14{font-size:14px;}.fs-16{font-size:16px;}.fs-18{font-size:18px;}
-.c-3{color:#333;}.c-6{color:#666;}.c-9{color:#999;}.c-blue{color:#3399FF;}
+.c-f{color:#fff;}.c-3{color:#333;}.c-6{color:#666;}.c-9{color:#999;}.c-blue{color:#3399FF;}.c-red{color:#f00;}
 .lh-20{line-height:2;}
 .bg-f{background:#fff;}
 .oneline{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -46,14 +45,18 @@ html,body{height:100%;overflow:hidden;}
 .midLayout{width:80%;margin:20px auto;}
 
 /* topbar */
-.nav{background:#20A0FF;font-size:0;padding-left:100px;}
+.nav-main{background:linear-gradient(90deg,#337EFF,#1EA3FF);height:60px;width:100%;display:flex;flex-direction:row;align-items:center;position:absolute;z-index:3;}
+.nav-main .icon-list{display:none;font-size:24px;color:#fff!important;margin:0 10px;}
+.nav-main .nav-my{position:absolute;right:0;top:0;}
+.nav-main .nav-my a{color:#fff;}
+.nav-main .nav-my a.active{color:#3399FF;}
+
+.nav-list{position:absolute;left:100px;top:0;z-index:4;}
 .nav-item{display:inline-block;font-size:16px;color:#fff;height:60px;line-height:60px;margin:0 20px;position:relative;padding:0 20px;}
 .nav-item.active:before{content:"";display:inline-block;width:100%;height:4px;background:rgba(255,255,255,0.5);position:absolute;left:0;bottom:0;}
-.nav-item:hover{text-decoration:none;}
+.nav-item:hover{text-decoration:none;color:#C8DBFF;}
 
-
-h1{font-size:20px;color:#333;margin:20px 0;font-weight:normal;}
-
+/* 图书列表 */
 .listBlock{margin:0 -10px;}
 .listBlock li{display:inline-block;width:260px;vertical-align:top;text-align:center;cursor:pointer;transition:0.3s;padding:8px;box-sizing:border-box;}
 .listBlock li .img{height:160px;}
@@ -66,7 +69,7 @@ h1{font-size:20px;color:#333;margin:20px 0;font-weight:normal;}
 .listLine .img:hover img{transform:scale(1.05);}
 .listLine b:hover{color:#3399FF;}
 
-.my-table .label{font-size:14px;color:#666;font-weight:normal;width:8em;padding:20px 10px;text-align:right;}
+.my-table .label{font-size:14px;color:#666;font-weight:normal;width:10em;padding:20px 10px;text-align:right;white-space:nowrap;}
 .my-table .el-input,.my-table .el-textarea{width:300px;}
 
 .sub-tit{font-size:16px;color:#333;margin:10px 0;padding:15px 0 15px 15px;position:relative;border-bottom:1px solid #D8DCE5;}
@@ -84,11 +87,34 @@ h1{font-size:20px;color:#333;margin:20px 0;font-weight:normal;}
 .el-menu-item a{display:inline-block;height:60px;line-height:60px;padding:0 20px;}
 label{margin-bottom:0;}
 
+.el-header{padding:0;}
 .nav .el-col-4{text-align:right;}
 .login{width:500px;}
 .login .el-input{margin:10px 0;}
 
+.nav .el-col-8{text-align:right;}
 .nav .el-button--text{display:block;color:#fff;margin-left:0;padding:10px 20px;}
 .nav .el-button--text:hover{color:#666;}
+
+.search{display:inline-block;width:200px;}
+
+@media screen and (max-width:800px){
+  .listBlock li{width:50%;}
+
+  .nav-main{height:4rem!important;}
+  .nav-main .icon-list{display:block;}
+
+  .nav-list{position:absolute;left:0;right:0;top:4rem;background:linear-gradient(90deg,#337EFF,#1EA3FF);z-index:3;transform:translateY(-100%);transition:0.3s ease;z-index:2;}
+  .nav-list.active{transform:translateY(0);}  
+  .nav-list a{display:block;text-align:center;}
+  .nav-list a.active:before{height:0;}
+  
+  .el-main{padding:1rem;}
+  .midLayout{width:100%;margin:0;}
+  .search{width:100%;}
+  .login{width:80%;}
+  .el-pagination__total{display:block!important;}
+  .el-select,.el-pagination__jump{display:none!important;}
+}
 
 

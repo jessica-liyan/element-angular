@@ -1,24 +1,31 @@
-import {Injectable} from '@angular/core';
-import {CanActivate, Router} from '@angular/router';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+import { Injectable }       from '@angular/core';
+import {
+  CanActivate, Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+}                           from '@angular/router';
+import { AuthService }      from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  isLogined = false;
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(
-    private router: Router
-  ){}
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    let url: string = state.url;
 
-  canActivate(){
-    // 判断是否登录，如果登录return true，未登录，return false
-    if(this.isLogined){
-      return true
-    }else{
-      this.router.navigate([{outlets: {popup: ['login']}}])
-      return false
-    }
+    return this.checkLogin(url);
   }
 
+  // 利用authService服务判断是否已经登录
+  // 已登录，return true，未登录，return false
+  checkLogin(url: string): boolean {
+    if (this.authService.isLoggedIn) { return true; }
+
+    // Store the attempted URL for redirecting
+    this.authService.redirectUrl = url;
+
+    // Navigate to the login page with extras
+    this.router.navigate(['/login']);
+    return false;
+  }
 }
