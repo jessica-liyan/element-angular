@@ -8,7 +8,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import * as Rx from 'rxjs/Rx';
-import {showMsg} from 'ng5-ui';
+// import { LyModule } from 'ng5-ui';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     private titleService: Title,
     private localStorage: CoolLocalStorage
   ) {
-    console.log(showMsg)
+    //console.log(LyModule)
   }
 
   show:boolean = false;

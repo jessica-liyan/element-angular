@@ -19,6 +19,9 @@ import {MyModule} from './my/my.module';
 import {DoubanService} from './douban.service';
 import { CoolStorageModule } from 'angular2-cool-storage';
 
+// 测试ng5-ui
+//import { LyModule } from 'ng5-ui';
+
 const routes: Routes = [{
   path: '',
   redirectTo: '/movie',
@@ -45,7 +48,8 @@ const routes: Routes = [{
     CoolStorageModule,
     RouterModule.forRoot(routes,{
       enableTracing: false
-    })
+    }),
+    
   ],
   declarations: [
     AppComponent,
